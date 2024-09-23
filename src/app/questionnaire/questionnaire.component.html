@@ -1,40 +1,42 @@
-<h3>{{ qx.name }} Questionnaire</h3>
-
-<div class="qx-container">
-
-    <section class="config-section">
-        <mat-checkbox
-            class="config-item-margin"
-            [(ngModel)]="config.isCanngen"
-            (change)="reload()"
-            >I am Canngen</mat-checkbox
+<p>
+    I would like to take: 
+    <mat-radio-group aria-label="Select a questionnaire" 
+        (change)="takeQuestionnaire($event)"
+        [(ngModel)]="qxName"
         >
-        <mat-checkbox
-            class="config-item-margin"
-            [(ngModel)]="config.isMissourri"
-            (change)="reload()"
-            >I am sole MO</mat-checkbox
-        >
-        <mat-checkbox
-            class="config-item-margin"
-            [(ngModel)]="config.isEvenMoreSpecial"
-            (change)="reload()"
-            >I am even more special</mat-checkbox
-        >
-        <p>
-            {{ config | json }}
-        </p>
-    </section>
-    
-  
-</div>
+        @for (qx of availables; track qx) {
+            <mat-radio-button class="qx-radio-button" [value]="qx.name">{{qx.name}}</mat-radio-button>
+        }
+    </mat-radio-group>
+</p>
 
 <mat-divider></mat-divider>
 
+<h3>{{ qx.name }} Questionnaire</h3>
+
+<section class="config-section">
+    <mat-checkbox class="config-item-margin" [(ngModel)]="config.isCanngen" (change)="reload()">I am Canngen</mat-checkbox>
+    <mat-checkbox class="config-item-margin" [(ngModel)]="config.isMissourri" (change)="reload()">I am sole MO</mat-checkbox>
+    <mat-checkbox class="config-item-margin" [(ngModel)]="config.isEvenMoreSpecial" (change)="reload()">I am even more special</mat-checkbox>
+    <p>
+        {{ config | json }}
+    </p>
+</section>
+<mat-divider></mat-divider>
 <mat-tab-group>
     <mat-tab *ngFor="let section of qx.sections">
         <ng-template mat-tab-label>{{ section.name }}</ng-template>
 
-        <qx-questionnaire-section [section]="section"  />
+        <qx-questionnaire-section [section]="section" [operation]="operation" />
     </mat-tab>
 </mat-tab-group>
+
+<p>
+    <button mat-button color="primary" (click)="collect()">Next</button>
+</p>
+
+<h3>Questionnair api contract</h3>
+<button mat-button color="primary" (click)="displayPayload()">Show API payload</button>
+<div>
+    {{ payload | json }}
+</div>

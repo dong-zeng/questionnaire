@@ -1,3 +1,5 @@
+import { QuestionnaireSection } from "./questionnaire-section.model";
+
 export class Questionnair {
     sections: QuestionnaireSection[];
     name: string;
@@ -7,27 +9,13 @@ export class Questionnair {
         this.sections = [];
     }
 
-    add(section: QuestionnaireSection): void {
-        this.sections.push(section);
-    }
+    add = (section: QuestionnaireSection) => this.sections.push(section);
 }
 
 export interface QuestionnaireConfig {
     isCanngen: boolean;
     isMissourri: boolean;
     isEvenMoreSpecial: boolean;
-}
-
-export class QuestionnaireSection {
-    displayOrder: number;
-    name: string;
-    ////questions: QuestionV1[];
-
-    constructor(displayOrder: number, name: string) {
-        this.displayOrder = displayOrder;
-        this.name = name;
-        ////this.questions = [];
-    }
 }
 
 export class QuestionnairOperation {
@@ -37,8 +25,7 @@ export class QuestionnairOperation {
         this.type = type;
     }
 
-    isChangeToNextGroup = (): boolean =>
-        this.type === QuestionnairOperationType.changeToNextSection;
+    isChangeToNextGroup = (): boolean => this.type === QuestionnairOperationType.changeToNextSection;
 }
 
 export enum QuestionnairOperationType {

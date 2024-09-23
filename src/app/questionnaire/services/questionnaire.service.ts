@@ -1,5 +1,9 @@
 import { Injectable } from "@angular/core";
-import { Questionnair, QuestionnaireConfig, QuestionnaireSection, standardSectionNames } from "../models/questionnaire.model";
+import { Question, QuestionnaireConfig } from "../models/question.model";
+import { QuestionnaireSection, SectionDefinition } from "../models/questionnaire-section.model";
+import { Questionnair, QuestionnairOperation, QuestionnairOperationType } from "../models/questionnaire.model";
+import { createQuestion } from "./question.service";
+import { offerrings, QuestionnaireDefinition } from "./questionnaires-data.service";
 
 @Injectable({
     providedIn: 'root',
@@ -7,24 +11,90 @@ import { Questionnair, QuestionnaireConfig, QuestionnaireSection, standardSectio
 export class QuestionnaireService {
     constructor() {}
 
-    getQuestionnaire(config: QuestionnaireConfig): Questionnair {
-        const qx = this.createDefaultQuestionnaire('Programmable');     
-        return qx;
+    getQuestionnaire(name: string, config: QuestionnaireConfig): Questionnair {
+        return this.getQuestionnaireImpl(name, config);
     }
 
-    createDefaultQuestionnaire(name: string): Questionnair {
-        const qx = new Questionnair(name);
+    getQuestionnaireImpl(name: string, config: QuestionnaireConfig): Questionnair {
+        const def = offerrings.find((o) => o.name === name);
+        if (name === 'truck questionnaire') {
+            const qx = this.createTruckQuestionnaire(def!, config);
+            this.manageQuestionapplicability(qx.sections, config, notApplicables);
+            return qx;
+        }
 
-        let displayOrder = 0;
-        standardSectionNames.forEach((s: string) => {
-            const section: QuestionnaireSection = {
-                displayOrder: displayOrder++,
-                name: s,
-                ////questions: [],
-            };
-            qx.add(section);
+        return this.createQuestionnaire(def!);
+    }
+
+    getQuestionnaireSection(definition: SectionDefinition): QuestionnaireSection {
+        const section = new QuestionnaireSection(definition.displayOrder, definition.name, definition.label);
+
+        definition.questions.forEach((q) => {
+            const question = createQuestion(q);
+            console.log('got this question from factory: ', question);
+            if (question) section.questions.push(question);
         });
 
+        if (definition.rules) section.setRulesFunc(definition.rules);
+
+        return section;
+    }
+
+    createTruckQuestionnaire(def: QuestionnaireDefinition, config: QuestionnaireConfig): Questionnair {
+        const qx = new Questionnair(def.name);
+        def.sections.forEach((s) => {
+            if (s.name.toLowerCase() != 'supplemental') {
+                qx.add(this.getQuestionnaireSection(s));
+            } else {
+                if (config.isCanngen) qx.add(this.getQuestionnaireSection(s));
+            }
+        });
         return qx;
     }
+
+    createQuestionnaire(def: QuestionnaireDefinition): Questionnair {
+        const qx = new Questionnair(def.name);
+        def.sections.forEach((s) => qx.add(this.getQuestionnaireSection(s)));
+        return qx;
+    }
+
+    manageQuestionapplicability(sections: QuestionnaireSection[], config: QuestionnaireConfig, notApplicables: any): void {
+        this.enableQuestions(sections);
+
+        if (config.isCanngen) this.disableQuestions(sections, notApplicables.idsOfQuestionsNotApplicableForCanngen);
+
+        if (config.isMissourri) this.disableQuestions(sections, notApplicables.idsOfQuestionsNotApplicableForMissourri);
+    }
+
+    enableQuestions(sections: QuestionnaireSection[]): void {
+        sections.forEach((s) => s.questions.forEach((q) => (q.applicable = true)));
+    }
+
+    disableQuestions(sections: QuestionnaireSection[], ids: string[]): void {
+        sections.forEach((s) => {
+            s.questions.forEach((q) => {
+                if (ids.some((x) => x === q.id)) q.applicable = false;
+            });
+        });
+    }
+
+    getPaperWork(qx: Questionnair) {
+        const flattened: any = {};
+
+        qx.sections.forEach((g) => {
+            g.questions.forEach((q: Question) => q.reportAnswer(flattened));
+        });
+
+        return flattened;
+    }
+
+    createChangeToNextGroupOperation = (): QuestionnairOperation => new QuestionnairOperation(QuestionnairOperationType.changeToNextSection);
+
+    createIdlingOperation = (): QuestionnairOperation => new QuestionnairOperation(QuestionnairOperationType.none);
+
 }
+
+export const notApplicables: any = {
+    idsOfQuestionsNotApplicableForCanngen: ['quss2', 'qus24'],
+    idsOfQuestionsNotApplicableForMissourri: ['qus17'],
+};

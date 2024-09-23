@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, Input, OnInit, SimpleChanges, ViewChild } from "@angular/core";
-import { QuestionnaireSection } from "../models/questionnaire.model";
 import { NgForm } from "@angular/forms";
+import { QuestionnaireSection } from "../models/questionnaire-section.model";
+import { QuestionnairOperation } from "../models/questionnaire.model";
 
 @Component({
     selector: 'qx-questionnaire-section',
@@ -10,6 +11,7 @@ import { NgForm } from "@angular/forms";
 export class SectionComponent implements OnInit, AfterViewInit {
     @Input() section!: QuestionnaireSection;
     noToAll: boolean | undefined;
+    @Input() operation!: QuestionnairOperation;
     
     @ViewChild('myform') myform: NgForm | undefined;
 
