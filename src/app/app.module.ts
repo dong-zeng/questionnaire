@@ -35,11 +35,12 @@ import { MatSliderModule } from '@angular/material/slider';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
-import {AppComponent} from './app.component';
+import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { QuestionnaireComponent } from './questionnaire/questionnaire.component';
 import { HomeComponent } from './home/home.component';
 import { SectionComponent } from './questionnaire/section/section.component';
+import { QuestionComponent } from './questionnaire/question/question.component';
 
 @NgModule({ 
     declarations: [
@@ -47,6 +48,7 @@ import { SectionComponent } from './questionnaire/section/section.component';
         QuestionnaireComponent,
         HomeComponent,
         SectionComponent,
+        QuestionComponent
     ],
     bootstrap: [AppComponent], 
     imports: [BrowserModule,
