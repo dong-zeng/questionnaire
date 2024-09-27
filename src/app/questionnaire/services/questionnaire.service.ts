@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
-import { Question, QuestionnaireConfig } from "../models/question.model";
+import { Question } from "../models/question.model";
+import { QuestionnaireConfig } from '../models/questionnaire.model';
 import { QuestionnaireSection, SectionDefinition } from "../models/questionnaire-section.model";
 import { Questionnair, QuestionnairOperation, QuestionnairOperationType } from "../models/questionnaire.model";
 import { createQuestion } from "./question.service";

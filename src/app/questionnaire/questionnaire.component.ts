@@ -1,5 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
 import { Questionnair, QuestionnaireConfig, QuestionnairOperation } from './models/questionnaire.model';
 import { QuestionnaireService } from './services/questionnaire.service';
 import { offerrings, QuestionnaireDefinition } from './services/questionnaires-data.service';

@@ -12,15 +12,12 @@
 
 <mat-divider></mat-divider>
 
-<h3>{{ qx.name }} Questionnaire</h3>
+<h3>{{ qx.name }} </h3>
 
 <section class="config-section">
     <mat-checkbox class="config-item-margin" [(ngModel)]="config.isCanngen" (change)="reload()">I am Canngen</mat-checkbox>
     <mat-checkbox class="config-item-margin" [(ngModel)]="config.isMissourri" (change)="reload()">I am sole MO</mat-checkbox>
-    <mat-checkbox class="config-item-margin" [(ngModel)]="config.isEvenMoreSpecial" (change)="reload()">I am even more special</mat-checkbox>
-    <p>
-        {{ config | json }}
-    </p>
+    <mat-checkbox class="config-item-margin" [(ngModel)]="config.isEvenMoreSpecial" (change)="reload()">I am even more special</mat-checkbox>    
 </section>
 <mat-divider></mat-divider>
 <mat-tab-group>

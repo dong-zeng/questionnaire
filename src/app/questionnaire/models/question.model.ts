@@ -31,7 +31,10 @@ export class Question {
 
     hasChildQuestions = () => this.children != undefined && this.children.length > 0;
 
-    hasAnswer = (): boolean => this.answer.hasValue(); //// and child questions    
+    hasAnswer = (): boolean => {
+        if (this.type === QuestionType.group) return this.children.some((c) => c.hasAnswer());
+        return this.answer.hasValue();
+    };    
 }
 
 export interface QuestionDefinition {
@@ -49,12 +52,6 @@ export enum QuestionType {
     composite,
     group,
     //// question/single (with id), group (of questions, each with an id) , composite (one question with id, however without direct answer, with a group of questions , each with an id)
-}
-
-export interface QuestionnaireConfig {
-    isCanngen: boolean;
-    isMissourri: boolean;
-    isEvenMoreSpecial: boolean;
 }
 
 export abstract class QuestionConstants {

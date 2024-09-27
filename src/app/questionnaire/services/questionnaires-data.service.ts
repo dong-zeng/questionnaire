@@ -20,28 +20,18 @@ export const picBizQx: SectionDefinition[] = [
         displayOrder: 0,
         name: 'acord125',
         rules: (section: QuestionnaireSection) => {
-            const source = section.getQuestionById('cCompany');
-            const target = section.getQuestionById('cQuestionnaire1');
-            if (source && target) {
-                if (source.answer.hasAffirmativeValue()) {
-                    target.applicable = false;
-                    target.answer.value = AnswerConstants.empty;
-                } else {
-                    target.applicable = true;
-                }
-            }
         },
         questions: [
             {
                 id: 'cCompany',
                 label: '1',
-                text: 'Is your company doing well',
+                text: 'Is your company doing well?',
                 type: QuestionType.single,
                 answerConfig: {
                     type: AnswerDataType.exclusiveChoices,
                     isRequired: true,
                 },
-                childTrigger: ChildQuestionTriggeredFuncs.hasAffirmativeAnser,
+                childTrigger: ChildQuestionTriggeredFuncs.hasAffirmativeAnswer,
                 children: [
                     {
                         id: 'cCompany_Explain',
@@ -61,13 +51,13 @@ export const picBizQx: SectionDefinition[] = [
             {
                 id: 'cQuestionnaire1',
                 label: '2',
-                text: 'Is your company doing well and even better',
+                text: 'Do you know why your company is doing well?',
                 type: QuestionType.single,
                 answerConfig: {
                     type: AnswerDataType.exclusiveChoices,
                     isRequired: true,
                 },
-                childTrigger: ChildQuestionTriggeredFuncs.hasNegativeAnser,
+                childTrigger: ChildQuestionTriggeredFuncs.hasAffirmativeAnswer,
                 children: [
                     {
                         id: 'cQuestionnaire1_Explain',
@@ -84,24 +74,52 @@ export const picBizQx: SectionDefinition[] = [
                     },
                 ],
             },
+
+            {
+                id: 'cCompany_not_well',
+                label: '3',
+                text: 'Do you know why your company is not doing well?',
+                type: QuestionType.single,
+                answerConfig: {
+                    type: AnswerDataType.exclusiveChoices,
+                    isRequired: true,
+                },
+                childTrigger: ChildQuestionTriggeredFuncs.hasAffirmativeAnswer,
+                children: [
+                    {
+                        id: 'cCompany_not_well_Explain',
+                        label: undefined,
+                        text: 'Please explain',
+                        type: QuestionType.single,
+                        answerConfig: {
+                            type: AnswerDataType.longText,
+                            maxLength: AnswerConstants.longTextMaxLength,
+                            isRequired: true,
+                        },
+                        childTrigger: null,
+                        children: [],
+                    },
+                ],
+            },
+
             {
                 id: 'cQuestionnaire2',
-                label: '3',
+                label: '4',
                 text: 'This question is standard yes/no selection and trigger a child short text',
                 answerConfig: {
                     type: AnswerDataType.exclusiveChoices,
                     isRequired: true,
                 },
                 type: QuestionType.single,
-                childTrigger: ChildQuestionTriggeredFuncs.hasAffirmativeAnser,
+                childTrigger: ChildQuestionTriggeredFuncs.hasAffirmativeAnswer,
                 children: [
                     {
                         id: 'cQuestionnaire2_Explain',
                         label: undefined,
-                        text: 'Percentage',
+                        text: 'Your name',
                         type: QuestionType.single,
                         answerConfig: {
-                            type: AnswerDataType.shortText,
+                            type: AnswerDataType.text,
                             maxLength: AnswerConstants.shortTextMaxLength,
                             isRequired: true,
                         },
@@ -110,9 +128,62 @@ export const picBizQx: SectionDefinition[] = [
                     },
                 ],
             },
+
+            {
+                id: 'cQuestionnaireNumberSample',
+                label: '5',
+                text: 'This question is standard yes/no selection and trigger a child number',
+                answerConfig: {
+                    type: AnswerDataType.exclusiveChoices,
+                    isRequired: true,
+                },
+                type: QuestionType.single,
+                childTrigger: ChildQuestionTriggeredFuncs.hasAffirmativeAnswer,
+                children: [
+                    {
+                        id: 'cQuestionnaireNumberSample_Explain',
+                        label: undefined,
+                        text: 'Percentage',
+                        type: QuestionType.single,
+                        answerConfig: {
+                            type: AnswerDataType.number,
+                            isRequired: true,
+                        },
+                        childTrigger: null,
+                        children: [],
+                    },
+                ],
+            },
+
+            {
+                id: 'cQuestionnaireDateSample',
+                label: '6',
+                text: 'This question is standard yes/no selection and trigger a child date',
+                answerConfig: {
+                    type: AnswerDataType.exclusiveChoices,
+                    isRequired: true,
+                },
+                type: QuestionType.single,
+                childTrigger: ChildQuestionTriggeredFuncs.hasAffirmativeAnswer,
+                children: [
+                    {
+                        id: 'cQuestionnaireDateSample_Explain',
+                        label: undefined,
+                        text: 'Your Birth Date',
+                        type: QuestionType.single,
+                        answerConfig: {
+                            type: AnswerDataType.date,
+                            isRequired: true,
+                        },
+                        childTrigger: null,
+                        children: [],
+                    },
+                ],
+            },
+
             {
                 id: QuestionConstants.emptyId,
-                label: '4',
+                label: '7',
                 text: 'This question is a container hosting a group of choices child questions',
                 type: QuestionType.group,
                 answerConfig: {
@@ -154,7 +225,7 @@ export const picBizQx: SectionDefinition[] = [
                             type: AnswerDataType.inclusiveChoices,
                             isRequired: false,
                         },
-                        childTrigger: ChildQuestionTriggeredFuncs.hasAffirmativeAnser,
+                        childTrigger: ChildQuestionTriggeredFuncs.hasAffirmativeAnswer,
                         children: [
                             {
                                 id: 'cTruckType_other_Explain',
@@ -164,7 +235,7 @@ export const picBizQx: SectionDefinition[] = [
                                 answerConfig: {
                                     type: AnswerDataType.longText,
                                     maxLength: AnswerConstants.longTextMaxLength,
-                                    isRequired: false,
+                                    isRequired: true,
                                 },
                                 childTrigger: null,
                                 children: [],
@@ -191,7 +262,7 @@ export const picBizQx: SectionDefinition[] = [
                     type: AnswerDataType.exclusiveChoices,
                     isRequired: true,
                 },
-                childTrigger: ChildQuestionTriggeredFuncs.hasAffirmativeAnser,
+                childTrigger: ChildQuestionTriggeredFuncs.hasAffirmativeAnswer,
                 children: [
                     {
                         id: 'qus17_Explain',
@@ -217,7 +288,7 @@ export const picBizQx: SectionDefinition[] = [
                     type: AnswerDataType.exclusiveChoices,
                     isRequired: true,
                 },
-                childTrigger: ChildQuestionTriggeredFuncs.hasAffirmativeAnser,
+                childTrigger: ChildQuestionTriggeredFuncs.hasAffirmativeAnswer,
                 children: [
                     {
                         id: 'qus24_Explain',
@@ -281,7 +352,7 @@ export const foodQx: SectionDefinition[] = [
                     type: AnswerDataType.exclusiveChoices,
                     isRequired: true,
                 },
-                childTrigger: ChildQuestionTriggeredFuncs.hasAffirmativeAnser,
+                childTrigger: ChildQuestionTriggeredFuncs.hasAffirmativeAnswer,
                 children: [
                     {
                         id: 'cCompany_Explain',

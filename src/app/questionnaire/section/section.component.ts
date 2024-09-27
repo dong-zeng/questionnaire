@@ -2,6 +2,7 @@ import { AfterViewInit, Component, Input, OnInit, SimpleChanges, ViewChild } fro
 import { NgForm } from "@angular/forms";
 import { QuestionnaireSection } from "../models/questionnaire-section.model";
 import { QuestionnairOperation } from "../models/questionnaire.model";
+import { debounceTime, distinctUntilChanged } from "rxjs";
 
 @Component({
     selector: 'qx-questionnaire-section',
@@ -16,7 +17,15 @@ export class SectionComponent implements OnInit, AfterViewInit {
     @ViewChild('myform') myform: NgForm | undefined;
 
     constructor() {}
-    ngAfterViewInit(): void {}
+
+    ngAfterViewInit(): void {
+        this.myform?.valueChanges?.pipe(
+            debounceTime(100), 
+            distinctUntilChanged()
+        ).subscribe({
+            next: () => this.section.manageSiblingQuestionInteractions(this.section),
+        });
+    }
 
     ngOnInit(): void {}
 

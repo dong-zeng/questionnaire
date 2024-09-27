@@ -17,7 +17,7 @@ export class AnswerConfiguration {
 export enum AnswerDataType {
     exclusiveChoices,
     longText,
-    shortText,
+    text,
     inclusiveChoices,
     number,
     date,
@@ -33,9 +33,15 @@ export class Answer {
         this.value = undefined;
     }
 
-    hasValue = (): boolean => this.value != undefined && this.value.toString().trim() !== AnswerConstants.empty;
+    hasValue = (): boolean => {
+        if (this.value == undefined) return false;
+        if (typeof this.value === 'boolean' && this.value == false) return false;
+        return this.value.toString().trim() != AnswerConstants.empty;
+    };
 
     hasAffirmativeValue = (): boolean => AnswerConstants.trueString === this.value || true === this.value;
+
+    hasNegativeValue = (): boolean => this.hasValue() && (AnswerConstants.falseString === this.value || false === this.value);
 }
 
 export abstract class AnswerConstants {

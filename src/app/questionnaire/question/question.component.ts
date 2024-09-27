@@ -24,9 +24,27 @@ export class QuestionComponent implements OnInit {
         console.log('this.question: ', this.question);
     }
 
+    ngOnChanges(changes: SimpleChanges) {
+        for (const propName in changes) {
+            if (propName === 'operation') {
+                const change = changes[propName];
+                if (change.currentValue.isChangeToNextGroup()) {
+                    this.collectAnswer = true;
+                }
+            }
+        }
+    }
+
     getLabel() {
         if (this.question.label) return `${this.question.label} . ${this.question.text}`;
         //return this.question.text;
         return null;
+    }
+
+    get triggered(): boolean {
+        const trigger = this.question.trigger;
+        if (!trigger) return false;
+
+        return trigger(this.question);
     }
 }
