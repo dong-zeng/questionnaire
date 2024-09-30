@@ -20,7 +20,7 @@ export class QuestionnaireService {
         const def = offerrings.find((o) => o.name === name);
         if (name === 'truck questionnaire') {
             const qx = this.createTruckQuestionnaire(def!, config);
-            this.manageQuestionapplicability(qx.sections, config, notApplicables);
+            this.manageQuestionApplicability(qx.sections, config, notApplicables);
             return qx;
         }
 
@@ -59,13 +59,13 @@ export class QuestionnaireService {
         return qx;
     }
 
-    manageQuestionapplicability(sections: QuestionnaireSection[], config: QuestionnaireConfig, notApplicables: any): void {
-        if (config.isCanngen) this.disableQuestions(sections, notApplicables.idsOfQuestionsNotApplicableForCanngen);
+    manageQuestionApplicability(sections: QuestionnaireSection[], config: QuestionnaireConfig, notApplicables: any): void {
+        if (config.isCanngen) this.makeQuestionsUnapplicable(sections, notApplicables.idsOfQuestionsNotApplicableForCanngen);
 
-        if (config.isMissourri) this.disableQuestions(sections, notApplicables.idsOfQuestionsNotApplicableForMissourri);
+        if (config.isMissourri) this.makeQuestionsUnapplicable(sections, notApplicables.idsOfQuestionsNotApplicableForMissourri);
     }
 
-    disableQuestions(sections: QuestionnaireSection[], ids: string[]): void {
+    makeQuestionsUnapplicable(sections: QuestionnaireSection[], ids: string[]): void {
         sections.forEach((s) => {
             s.questions.forEach((q) => {
                 if (ids.some((x) => x === q.id)) q.applicable = false;

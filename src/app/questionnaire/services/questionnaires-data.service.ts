@@ -20,6 +20,25 @@ export const picBizQx: SectionDefinition[] = [
         displayOrder: 0,
         name: 'acord125',
         rules: (section: QuestionnaireSection) => {
+            const source = section.getQuestionById('cCompany');
+            const target1 = section.getQuestionById('cQuestionnaire1');
+            const target2 = section.getQuestionById('cCompany_not_well');
+            if (source && target1) {
+                if (source.answer.hasNegativeValue()) {
+                    target1.applicable = false;
+                    target1.answer.value = AnswerConstants.empty;
+                } else {
+                    target1.applicable = true;
+                }
+            }
+            if (source && target2) {
+                if (source.answer.hasAffirmativeValue()) {
+                    target2.applicable = false;
+                    target2.answer.value = AnswerConstants.empty;
+                } else {
+                    target2.applicable = true;
+                }
+            }
         },
         questions: [
             {
