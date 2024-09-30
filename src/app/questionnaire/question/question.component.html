@@ -1,1 +1,32 @@
 <p>{{ getLabel() }}</p>
+
+<mat-grid-list cols="4" rowHeight="100px">
+    <mat-grid-tile [colspan]="3">
+        <qx-answer [collectAnswer]="collectAnswer" [question]="question" [operation]="operation"></qx-answer>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+        <mat-slide-toggle
+            *ngIf="question.applicable && question.answer.config.isRequired"
+            [disabled]="true"
+            [checked]="question.hasAnswer()"
+            [labelPosition]="question.hasAnswer() ? 'after' : 'before'"
+        >
+            @if(question.hasAnswer()){
+            <span>Answered</span>
+            }@else {
+            <span>Need answer</span>
+            }
+        </mat-slide-toggle>
+    </mat-grid-tile>
+</mat-grid-list>
+
+@if( question.type === 0 || question.type === 2 ){
+<ng-container *ngIf="triggered">
+    <div *ngFor="let child of question.children" class="child">
+        <qx-question class="child" [question]="child" [operation]="operation"></qx-question>
+    </div>
+</ng-container>
+} @else () {
+<p>Question of type '{{ question.type }}' is not supported</p>
+}

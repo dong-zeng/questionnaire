@@ -31,7 +31,7 @@ export const picBizQx: SectionDefinition[] = [
                     type: AnswerDataType.exclusiveChoices,
                     isRequired: true,
                 },
-                childTrigger: ChildQuestionTriggeredFuncs.hasAffirmativeAnswer,
+                childTrigger: ChildQuestionTriggeredFuncs.triggerByAffirmativeAnswer,
                 children: [
                     {
                         id: 'cCompany_Explain',
@@ -57,7 +57,7 @@ export const picBizQx: SectionDefinition[] = [
                     type: AnswerDataType.exclusiveChoices,
                     isRequired: true,
                 },
-                childTrigger: ChildQuestionTriggeredFuncs.hasAffirmativeAnswer,
+                childTrigger: ChildQuestionTriggeredFuncs.triggerByAffirmativeAnswer,
                 children: [
                     {
                         id: 'cQuestionnaire1_Explain',
@@ -84,7 +84,7 @@ export const picBizQx: SectionDefinition[] = [
                     type: AnswerDataType.exclusiveChoices,
                     isRequired: true,
                 },
-                childTrigger: ChildQuestionTriggeredFuncs.hasAffirmativeAnswer,
+                childTrigger: ChildQuestionTriggeredFuncs.triggerByAffirmativeAnswer,
                 children: [
                     {
                         id: 'cCompany_not_well_Explain',
@@ -111,7 +111,7 @@ export const picBizQx: SectionDefinition[] = [
                     isRequired: true,
                 },
                 type: QuestionType.single,
-                childTrigger: ChildQuestionTriggeredFuncs.hasAffirmativeAnswer,
+                childTrigger: ChildQuestionTriggeredFuncs.triggerByAffirmativeAnswer,
                 children: [
                     {
                         id: 'cQuestionnaire2_Explain',
@@ -138,7 +138,7 @@ export const picBizQx: SectionDefinition[] = [
                     isRequired: true,
                 },
                 type: QuestionType.single,
-                childTrigger: ChildQuestionTriggeredFuncs.hasAffirmativeAnswer,
+                childTrigger: ChildQuestionTriggeredFuncs.triggerByAffirmativeAnswer,
                 children: [
                     {
                         id: 'cQuestionnaireNumberSample_Explain',
@@ -164,7 +164,7 @@ export const picBizQx: SectionDefinition[] = [
                     isRequired: true,
                 },
                 type: QuestionType.single,
-                childTrigger: ChildQuestionTriggeredFuncs.hasAffirmativeAnswer,
+                childTrigger: ChildQuestionTriggeredFuncs.triggerByAffirmativeAnswer,
                 children: [
                     {
                         id: 'cQuestionnaireDateSample_Explain',
@@ -190,7 +190,7 @@ export const picBizQx: SectionDefinition[] = [
                     type: AnswerDataType.none,
                     isRequired: true,
                 },
-                childTrigger: ChildQuestionTriggeredFuncs.none,
+                childTrigger: ChildQuestionTriggeredFuncs.always,
                 children: [
                     {
                         id: 'cTruckType_flatbed',
@@ -225,7 +225,7 @@ export const picBizQx: SectionDefinition[] = [
                             type: AnswerDataType.inclusiveChoices,
                             isRequired: false,
                         },
-                        childTrigger: ChildQuestionTriggeredFuncs.hasAffirmativeAnswer,
+                        childTrigger: ChildQuestionTriggeredFuncs.triggerByAffirmativeAnswer,
                         children: [
                             {
                                 id: 'cTruckType_other_Explain',
@@ -262,7 +262,7 @@ export const picBizQx: SectionDefinition[] = [
                     type: AnswerDataType.exclusiveChoices,
                     isRequired: true,
                 },
-                childTrigger: ChildQuestionTriggeredFuncs.hasAffirmativeAnswer,
+                childTrigger: ChildQuestionTriggeredFuncs.triggerByAffirmativeAnswer,
                 children: [
                     {
                         id: 'qus17_Explain',
@@ -288,7 +288,7 @@ export const picBizQx: SectionDefinition[] = [
                     type: AnswerDataType.exclusiveChoices,
                     isRequired: true,
                 },
-                childTrigger: ChildQuestionTriggeredFuncs.hasAffirmativeAnswer,
+                childTrigger: ChildQuestionTriggeredFuncs.triggerByAffirmativeAnswer,
                 children: [
                     {
                         id: 'qus24_Explain',
@@ -352,7 +352,7 @@ export const foodQx: SectionDefinition[] = [
                     type: AnswerDataType.exclusiveChoices,
                     isRequired: true,
                 },
-                childTrigger: ChildQuestionTriggeredFuncs.hasAffirmativeAnswer,
+                childTrigger: ChildQuestionTriggeredFuncs.triggerByAffirmativeAnswer,
                 children: [
                     {
                         id: 'cCompany_Explain',

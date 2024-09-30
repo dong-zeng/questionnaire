@@ -41,6 +41,8 @@ import { QuestionnaireComponent } from './questionnaire/questionnaire.component'
 import { HomeComponent } from './home/home.component';
 import { SectionComponent } from './questionnaire/section/section.component';
 import { QuestionComponent } from './questionnaire/question/question.component';
+import { AnswerComponent } from './questionnaire/answer/answer.component';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @NgModule({ 
     declarations: [
@@ -48,7 +50,8 @@ import { QuestionComponent } from './questionnaire/question/question.component';
         QuestionnaireComponent,
         HomeComponent,
         SectionComponent,
-        QuestionComponent
+        QuestionComponent,
+        AnswerComponent
     ],
     bootstrap: [AppComponent], 
     imports: [BrowserModule,
@@ -75,6 +78,7 @@ import { QuestionComponent } from './questionnaire/question/question.component';
         DragDropModule,
         MatRadioModule,
         MatSliderModule,
+        MatSlideToggleModule,
         MatDatepickerModule,
         MatNativeDateModule,
         ReactiveFormsModule,
