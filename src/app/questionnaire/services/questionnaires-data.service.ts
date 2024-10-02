@@ -206,7 +206,7 @@ export const picBizQx: SectionDefinition[] = [
                 text: 'This question is a container hosting a group of choices child questions',
                 type: QuestionType.group,
                 answerConfig: {
-                    type: AnswerDataType.none,
+                    type: AnswerDataType.empty,
                     isRequired: true,
                 },
                 childTrigger: ChildQuestionTriggeredFuncs.always,
