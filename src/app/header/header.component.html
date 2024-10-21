@@ -1,0 +1,58 @@
+<mat-toolbar color="primary">
+    <div>
+    <button mat-icon-button (click)="openNavbar()">
+        <mat-icon>menu</mat-icon>
+    </button>
+
+    <a mat-button [matMenuTriggerFor]="dropdown">
+        Screens
+    </a>
+
+    <mat-menu #dropdown>
+        <button mat-menu-item routerLink="/">Home</button>
+        <button mat-menu-item routerLink="/questionnaire">Questionnaire</button>
+    </mat-menu>
+    </div>
+
+    <div>
+    <a mat-button>
+        <mat-icon>person_add</mat-icon>
+        <span>Register</span>
+    </a>
+
+    <a mat-button>
+        <mat-icon>account_circle</mat-icon>
+        <span>Login</span>
+    </a>
+</div>
+
+</mat-toolbar>
+
+<div class="off-canvas-container">
+    <div class="off-canvas-navbar" [class.open]="isOpen()">
+        <button mat-icon-button (click)="closeNavbar()" color="primary" class="close-btn">
+            <mat-icon>cancel</mat-icon>
+        </button>
+
+        <mat-nav-list>
+            <a mat-list-item (click)="navigateTo('/')">
+                <mat-icon class="me-2">library_books</mat-icon>
+                <span>Home</span>
+            </a>
+
+            <a mat-list-item (click)="navigateTo('questionnaire')">
+                <mat-icon class="me-2">question_answer</mat-icon>
+                <span>Questionnaire</span>
+            </a>
+
+        </mat-nav-list>
+
+        <!-- Comment by Swapnil on 10/22 -->
+        <!-- Commented out the vertical stepper for now -->
+        <!-- <mat-vertical-stepper>
+            <mat-step label="Step 1"></mat-step>
+            <mat-step label="Step 2"></mat-step>
+            <mat-step label="Step 3"></mat-step>
+        </mat-vertical-stepper> -->
+    </div>
+</div>
