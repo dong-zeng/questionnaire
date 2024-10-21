@@ -43,6 +43,7 @@ import { SectionComponent } from './questionnaire/section/section.component';
 import { QuestionComponent } from './questionnaire/question/question.component';
 import { AnswerComponent } from './questionnaire/answer/answer.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({ 
     declarations: [
@@ -51,7 +52,8 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
         HomeComponent,
         SectionComponent,
         QuestionComponent,
-        AnswerComponent
+        AnswerComponent,
+        HeaderComponent
     ],
     bootstrap: [AppComponent], 
     imports: [BrowserModule,

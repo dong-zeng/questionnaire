@@ -3,11 +3,36 @@
 
 @import "@angular/material/prebuilt-themes/indigo-pink.css";
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+@import './variables.scss';
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
 @for $i from 0 through 24 {
     .mat-mdc-card.mat-elevation-z#{$i} {
         @include mat.elevation($i);
     }
+}
+
+.me-1 {
+    margin-right: 2.5px;
+}
+
+.me-2 {
+    margin-right: 5px;
+}
+
+.me-3 {
+    margin-right: 7.5px;
+}
+
+.me-4 {
+    margin-right: 10px;
 }

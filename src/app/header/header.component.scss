@@ -1,0 +1,48 @@
+@import '../../styles/variables.scss';
+
+.off-canvas-navbar {
+    position: fixed;
+    top: 0;
+    left: -250px;
+    width: 250px;
+    height: 100%;
+    background-color: $sidepanel;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.3);
+    transition: left 1s ease;
+    z-index: 999;
+
+    &.open {
+        left: 0;
+    }
+
+    .close-btn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+    }
+
+    mat-nav-list {
+        margin-top: 60px;
+    }
+}
+
+::ng-deep {
+    mat-nav-list {
+        margin-top: 60px;
+
+        a span {
+            display: flex;
+            align-items: center;
+        }
+    }
+}
+
+mat-toolbar {
+    display: flex;
+    justify-content: space-between;
+
+    div {
+        display: flex;
+        align-items: center;
+    }
+}
